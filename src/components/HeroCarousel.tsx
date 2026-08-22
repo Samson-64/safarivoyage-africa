@@ -31,20 +31,21 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
   const [direction, setDirection] = useState(1);
 
   const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
-  const current = destinations[currentIndex] || destinations[0];
+  const current = destinations[currentIndex] ?? destinations[0];
 
   const handleNext = useCallback(() => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % destinations.length);
   }, [destinations.length]);
 
-  // Autonomous continuous autoplay - never pauses
+  // Autonomous continuous autoplay
   useEffect(() => {
-    const timer = setInterval(() => {
-      handleNext();
-    }, 5500);
+    if (!current) return;
+    const timer = setInterval(handleNext, 5500);
     return () => clearInterval(timer);
-  }, [handleNext]);
+  }, [handleNext, current]);
+
+  if (!current) return null;
 
   return (
     <section 
@@ -179,8 +180,8 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                 {destinations.map((dest, idx) => {
                   const offset = (idx - currentIndex + destinations.length) % destinations.length;
                   const isCenter = offset === 0;
-                  const isNext = offset === 1 || offset === -(destinations.length - 1);
-                  const isPrev = offset === destinations.length - 1 || offset === -1;
+                  const isNext = offset === 1;
+                  const isPrev = offset === destinations.length - 1;
 
                   if (!isCenter && !isNext && !isPrev) return null;
 
@@ -220,7 +221,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                             {dest.region}
                           </span>
                           <span className="text-[10px] text-white/60 font-mono">
-                            0{idx + 1}
+                            {(idx + 1).toString().padStart(2, '0')}
                           </span>
                         </div>
                         <h4 className="text-base font-bold text-white leading-tight uppercase truncate">

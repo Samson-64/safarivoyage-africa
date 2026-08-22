@@ -7,74 +7,81 @@
 class SavannaSoundscape {
   private ctx: AudioContext | null = null;
   private isPlaying = false;
-  private gainNode: GainNode | null = null;
-  private noiseTimer: number | null = null;
+  private masterGain: GainNode | null = null;
+  private noiseSource: AudioBufferSourceNode | null = null;
   private cricketTimer: number | null = null;
 
   public init() {
     if (!this.ctx) {
-      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       this.ctx = new AudioContextClass();
     }
   }
 
   public play() {
     this.init();
-    if (!this.ctx) return;
+    if (!this.ctx || this.isPlaying) return;
 
     if (this.ctx.state === 'suspended') {
       this.ctx.resume();
     }
 
     this.isPlaying = true;
-    this.gainNode = this.ctx.createGain();
-    this.gainNode.gain.setValueAtTime(0.01, this.ctx.currentTime);
-    this.gainNode.gain.exponentialRampToValueAtTime(0.2, this.ctx.currentTime + 2);
-    this.gainNode.connect(this.ctx.destination);
 
-    // Warm Savanna Breeze Generator (Brown Noise Filtered)
-    const bufferSize = this.ctx.sampleRate * 3;
-    const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const ctx = this.ctx;
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.01, ctx.currentTime);
+    masterGain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 2);
+    masterGain.connect(ctx.destination);
+    this.masterGain = masterGain;
+
+    // Warm Savanna Breeze Generator (filtered brown noise)
+    const bufferSize = ctx.sampleRate * 3;
+    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
     let lastOut = 0.0;
     for (let i = 0; i < bufferSize; i++) {
       const white = Math.random() * 2 - 1;
-      output[i] = (lastOut + (0.02 * white)) / 1.02;
+      output[i] = (lastOut + 0.02 * white) / 1.02;
       lastOut = output[i];
       output[i] *= 3.5;
     }
 
-    const whiteNoise = this.ctx.createBufferSource();
-    whiteNoise.buffer = noiseBuffer;
-    whiteNoise.loop = true;
+    const noiseSource = ctx.createBufferSource();
+    noiseSource.buffer = noiseBuffer;
+    noiseSource.loop = true;
 
-    const filter = this.ctx.createBiquadFilter();
+    const filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(280, this.ctx.currentTime);
+    filter.frequency.setValueAtTime(280, ctx.currentTime);
 
-    whiteNoise.connect(filter);
-    filter.connect(this.gainNode);
-    whiteNoise.start();
+    noiseSource.connect(filter);
+    filter.connect(masterGain);
+    noiseSource.start();
+    this.noiseSource = noiseSource;
 
     // Crickets & nocturnal savanna chirps
     const createCricketChirp = () => {
-      if (!this.isPlaying || !this.ctx || !this.gainNode) return;
-      const osc = this.ctx.createOscillator();
-      const chirpGain = this.ctx.createGain();
-      
+      if (!this.isPlaying || !ctx || !masterGain) return;
+
+      const osc = ctx.createOscillator();
+      const chirpGain = ctx.createGain();
+
       const freq = 4500 + Math.random() * 800;
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-      
-      chirpGain.gain.setValueAtTime(0.001, this.ctx.currentTime);
-      chirpGain.gain.exponentialRampToValueAtTime(0.04, this.ctx.currentTime + 0.04);
-      chirpGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.15);
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+      chirpGain.gain.setValueAtTime(0.001, ctx.currentTime);
+      chirpGain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 0.04);
+      chirpGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.15);
 
       osc.connect(chirpGain);
-      chirpGain.connect(this.gainNode);
+      chirpGain.connect(masterGain);
 
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.16);
+      osc.stop(ctx.currentTime + 0.16);
 
       const nextInterval = 200 + Math.random() * 800;
       this.cricketTimer = window.setTimeout(createCricketChirp, nextInterval);
@@ -85,30 +92,48 @@ class SavannaSoundscape {
 
   public stop() {
     this.isPlaying = false;
-    if (this.gainNode && this.ctx) {
+
+    if (this.cricketTimer !== null) {
+      window.clearTimeout(this.cricketTimer);
+      this.cricketTimer = null;
+    }
+
+    // Fade out, then tear down this cycle's nodes so repeated
+    // play/stop cycles don't leak disconnected sources or gains.
+    const ctx = this.ctx;
+    const masterGain = this.masterGain;
+    const noiseSource = this.noiseSource;
+
+    this.masterGain = null;
+    this.noiseSource = null;
+
+    if (ctx && masterGain) {
       try {
-        this.gainNode.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 1);
-        setTimeout(() => {
-          if (this.ctx && this.ctx.state === 'running') {
-            this.ctx.suspend();
-          }
-        }, 1000);
+        masterGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1);
       } catch {
         // Safe ignore
       }
+      window.setTimeout(() => {
+        try {
+          noiseSource?.stop();
+        } catch {
+          // Already stopped
+        }
+        masterGain.disconnect();
+        if (ctx.state === 'running' && !this.isPlaying) {
+          ctx.suspend();
+        }
+      }, 1000);
     }
-    if (this.noiseTimer) window.clearTimeout(this.noiseTimer);
-    if (this.cricketTimer) window.clearTimeout(this.cricketTimer);
   }
 
   public toggle(): boolean {
     if (this.isPlaying) {
       this.stop();
       return false;
-    } else {
-      this.play();
-      return true;
     }
+    this.play();
+    return true;
   }
 
   public getIsPlaying(): boolean {

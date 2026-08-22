@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { 
-  Compass, 
-  Calendar, 
-  Users, 
-  Star, 
-  Check, 
-  ArrowRight, 
-  Clock, 
-  Languages, 
+import {
+  Users,
+  Star,
+  Check,
+  ArrowRight,
+  Clock,
+  Languages,
   MapPin
 } from 'lucide-react';
 import { TourPackage, SupportedLanguage, SupportedCurrency } from '../types';
@@ -21,8 +19,9 @@ interface GuidedToursSectionProps {
   onOpenTourDetails: (tour: TourPackage) => void;
   currentLanguage: SupportedLanguage;
   currentCurrency: SupportedCurrency;
-  isDarkMode: boolean;
 }
+
+const REGION_TABS = ['All', 'East Africa', 'Southern Africa', 'North Africa'];
 
 export const GuidedToursSection: React.FC<GuidedToursSectionProps> = ({
   tours,
@@ -31,14 +30,12 @@ export const GuidedToursSection: React.FC<GuidedToursSectionProps> = ({
   currentLanguage,
   currentCurrency,
 }) => {
-  const [activeRegionTab, setActiveRegionTab] = useState<string>('All');
+  const [activeRegionTab, setActiveRegionTab] = useState('All');
   const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
 
-  const regions = ['All', 'East Africa', 'Southern Africa', 'North Africa'];
-
-  const filteredTours = activeRegionTab === 'All' 
-    ? tours 
-    : tours.filter(t => t.region === activeRegionTab);
+  const filteredTours = activeRegionTab === 'All'
+    ? tours
+    : tours.filter((tour) => tour.region === activeRegionTab);
 
   return (
     <section id="tours-section" className="space-y-8 pt-8">
@@ -59,7 +56,7 @@ export const GuidedToursSection: React.FC<GuidedToursSectionProps> = ({
 
         {/* Region Filter Tabs */}
         <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#14151a] border border-white/15">
-          {regions.map((reg) => (
+          {REGION_TABS.map((reg) => (
             <button
               key={reg}
               id={`tour-region-tab-${reg.toLowerCase().replace(/\s+/g, '-')}`}
@@ -86,7 +83,7 @@ export const GuidedToursSection: React.FC<GuidedToursSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.4, delay: index * 0.08 }}
-            className="rounded-2xl border border-white/15 bg-[#14151a] hover:border-white/40 overflow-hidden flex flex-col md:flex-row justify-between transition-all shadow-xl"
+            className="group rounded-2xl border border-white/15 bg-[#14151a] hover:border-white/40 overflow-hidden flex flex-col md:flex-row justify-between transition-all shadow-xl"
           >
             {/* Tour Image Left / Top */}
             <div className="relative md:w-5/12 h-56 md:h-auto overflow-hidden shrink-0 bg-[#181920]">

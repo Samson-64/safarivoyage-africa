@@ -45,13 +45,29 @@ interface NavbarProps {
   onLanguageChange: (lang: SupportedLanguage) => void;
   currentCurrency: SupportedCurrency;
   onCurrencyChange: (curr: SupportedCurrency) => void;
-  isDarkMode: boolean;
-  onToggleDarkMode: () => void;
   savedCount: number;
   onOpenBooking: () => void;
   onOpenMyBookings?: () => void;
   onNavigateSection: (sectionId: string) => void;
 }
+
+const LANGUAGES: { code: SupportedLanguage; label: string; flag: string }[] = [
+  { code: 'en', label: 'EN • English', flag: '🇬🇧' },
+  { code: 'fr', label: 'FR • Français', flag: '🇫🇷' },
+  { code: 'sw', label: 'SW • Kiswahili', flag: '🇹🇿' },
+  { code: 'es', label: 'ES • Español', flag: '🇪🇸' },
+  { code: 'de', label: 'DE • Deutsch', flag: '🇩🇪' },
+  { code: 'ar', label: 'AR • العربية', flag: '🇪🇬' },
+];
+
+const CURRENCIES: { code: SupportedCurrency; symbol: string; label: string }[] = [
+  { code: 'USD', symbol: '$', label: 'USD ($)' },
+  { code: 'EUR', symbol: '€', label: 'EUR (€)' },
+  { code: 'GBP', symbol: '£', label: 'GBP (£)' },
+  { code: 'KES', symbol: 'KSh', label: 'KES (KSh)' },
+  { code: 'ZAR', symbol: 'R', label: 'ZAR (R)' },
+  { code: 'EGP', symbol: 'E£', label: 'EGP (E£)' },
+];
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentLanguage,
@@ -78,23 +94,31 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const languages: { code: SupportedLanguage; label: string; flag: string }[] = [
-    { code: 'en', label: 'EN • English', flag: '🇬🇧' },
-    { code: 'fr', label: 'FR • Français', flag: '🇫🇷' },
-    { code: 'sw', label: 'SW • Kiswahili', flag: '🇹🇿' },
-    { code: 'es', label: 'ES • Español', flag: '🇪🇸' },
-    { code: 'de', label: 'DE • Deutsch', flag: '🇩🇪' },
-    { code: 'ar', label: 'AR • العربية', flag: '🇪🇬' },
-  ];
+  // Close any open dropdown when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!isLangDropdownOpen && !isCurrDropdownOpen) return;
 
-  const currencies: { code: SupportedCurrency; symbol: string; label: string }[] = [
-    { code: 'USD', symbol: '$', label: 'USD ($)' },
-    { code: 'EUR', symbol: '€', label: 'EUR (€)' },
-    { code: 'GBP', symbol: '£', label: 'GBP (£)' },
-    { code: 'KES', symbol: 'KSh', label: 'KES (KSh)' },
-    { code: 'ZAR', symbol: 'R', label: 'ZAR (R)' },
-    { code: 'EGP', symbol: 'E£', label: 'EGP (E£)' },
-  ];
+    const closeAll = () => {
+      setIsLangDropdownOpen(false);
+      setIsCurrDropdownOpen(false);
+    };
+
+    const handlePointerDown = (e: PointerEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('[data-navbar-dropdown]')) closeAll();
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeAll();
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isLangDropdownOpen, isCurrDropdownOpen]);
 
   return (
     <header 
@@ -162,7 +186,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="hidden md:flex items-center space-x-3">
           
           {/* Language Selector Dropdown */}
-          <div className="relative">
+          <div className="relative" data-navbar-dropdown>
             <button
               id="language-dropdown-toggle-button"
               onClick={() => {
@@ -180,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="px-3 py-1 text-[10px] font-bold text-white/60 tracking-widest uppercase border-b border-white/10">
                   {t.language}
                 </div>
-                {languages.map((lang) => (
+                {LANGUAGES.map((lang) => (
                   <button
                     key={lang.code}
                     id={`lang-option-${lang.code}`}
@@ -200,7 +224,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Currency Selector Dropdown */}
-          <div className="relative">
+          <div className="relative" data-navbar-dropdown>
             <button
               id="currency-dropdown-toggle-button"
               onClick={() => {
@@ -218,7 +242,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="px-3 py-1 text-[10px] font-bold text-white/60 tracking-widest uppercase border-b border-white/10">
                   {t.currency}
                 </div>
-                {currencies.map((curr) => (
+                {CURRENCIES.map((curr) => (
                   <button
                     key={curr.code}
                     id={`currency-option-${curr.code}`}
@@ -337,7 +361,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onChange={(e) => onLanguageChange(e.target.value as SupportedLanguage)}
                 className="w-full bg-[#181920] border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-white"
               >
-                {languages.map((l) => (
+                {LANGUAGES.map((l) => (
                   <option key={l.code} value={l.code}>{l.flag} {l.label}</option>
                 ))}
               </select>
@@ -351,7 +375,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onChange={(e) => onCurrencyChange(e.target.value as SupportedCurrency)}
                 className="w-full bg-[#181920] border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-white"
               >
-                {currencies.map((c) => (
+                {CURRENCIES.map((c) => (
                   <option key={c.code} value={c.code}>{c.label}</option>
                 ))}
               </select>

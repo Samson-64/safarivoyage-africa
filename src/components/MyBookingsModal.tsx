@@ -2,6 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { X, Compass, Calendar, Users, CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
 import { SparkleButton } from './SparkleButton';
 
+interface StoredAddOn {
+  id: string;
+  name?: string;
+}
+
+interface StoredBooking {
+  id: number | string;
+  bookingCode: string;
+  status?: string;
+  tourTitle: string;
+  destinationName?: string;
+  startDate: string;
+  guestsCount: number;
+  totalAmountUsd: number;
+  guestName?: string;
+  guestEmail?: string;
+  selectedAddOns?: StoredAddOn[];
+}
+
 interface MyBookingsModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,7 +32,7 @@ export const MyBookingsModal: React.FC<MyBookingsModalProps> = ({
   onClose,
   onOpenNewBooking,
 }) => {
-  const [bookings, setBookings] = useState<any[]>([]);
+  const [bookings, setBookings] = useState<StoredBooking[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,8 +47,9 @@ export const MyBookingsModal: React.FC<MyBookingsModalProps> = ({
       } else {
         setBookings([]);
       }
-    } catch (err: any) {
-      setError(err?.message || 'Unable to retrieve your safari bookings.');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      setError(message || 'Unable to retrieve your safari bookings.');
     } finally {
       setLoading(false);
     }
@@ -168,10 +188,10 @@ export const MyBookingsModal: React.FC<MyBookingsModalProps> = ({
                     </div>
                   </div>
 
-                  {b.selectedAddOns && Array.isArray(b.selectedAddOns) && b.selectedAddOns.length > 0 && (
+                  {b.selectedAddOns && b.selectedAddOns.length > 0 && (
                     <div className="pt-2 border-t border-white/5 flex flex-wrap gap-1.5 items-center">
                       <span className="text-[10px] uppercase text-white/50 mr-1">Add-ons:</span>
-                      {b.selectedAddOns.map((addon: any, idx: number) => (
+                      {b.selectedAddOns.map((addon, idx: number) => (
                         <span key={idx} className="text-[10px] bg-white/10 px-2 py-0.5 rounded-full border border-white/10 text-white/90">
                           {addon.name || addon.id}
                         </span>

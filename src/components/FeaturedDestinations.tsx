@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  MapPin, 
-  Bookmark, 
-  Compass, 
-  Sparkles
+import {
+  MapPin,
+  Bookmark,
+  Compass
 } from 'lucide-react';
 import { Destination, SupportedLanguage, SupportedCurrency } from '../types';
 import { TRANSLATIONS, formatPrice } from '../utils/translations';
@@ -18,7 +17,6 @@ interface FeaturedDestinationsProps {
   onBookTour: (dest: Destination) => void;
   currentLanguage: SupportedLanguage;
   currentCurrency: SupportedCurrency;
-  isDarkMode: boolean;
 }
 
 interface DestinationCardProps {
@@ -40,13 +38,9 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   onBookTour,
   currentCurrency,
 }) => {
-  // Extract up to 3 images for the 3-dot pagination carousel
-  const images = [
-    dest.heroImage,
-    ...(dest.gallery && dest.gallery.length > 0 ? dest.gallery : [])
-  ].slice(0, 3);
-
-  // If less than 3 images, duplicate to ensure 3 pagination dots matching the UI reference
+  // Up to 3 images for the 3-dot pagination carousel (padded with the hero
+  // image so there are always exactly 3 slides)
+  const images = [dest.heroImage, ...dest.gallery].slice(0, 3);
   while (images.length < 3) {
     images.push(dest.heroImage);
   }

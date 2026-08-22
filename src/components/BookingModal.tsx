@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   X, 
   Calendar, 
-  Users, 
   ShieldCheck, 
   Download, 
   ArrowRight, 
@@ -22,8 +21,23 @@ interface BookingModalProps {
   selectedDestination?: Destination | null;
   currentLanguage: SupportedLanguage;
   currentCurrency: SupportedCurrency;
-  isDarkMode: boolean;
 }
+
+function getDefaultStartDate(): string {
+  const date = new Date();
+  date.setDate(date.getDate() + 14);
+  return date.toISOString().split('T')[0];
+}
+
+const INITIAL_TRAVELER = {
+  fullName: 'Alex Vance',
+  email: 'alex.vance@safari-voyage.com',
+  phone: '+1 (555) 234-8900',
+  countryOfResidence: 'United States',
+  dietaryNotes: 'Vegetarian friendly options appreciated',
+  specialRequests: 'Would love morning game drives focused on big cats',
+  guideLanguagePreference: 'English',
+};
 
 export const BookingModal: React.FC<BookingModalProps> = ({
   isOpen,
@@ -36,24 +50,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
 
   // Form State
-  const defaultDate = new Date();
-  defaultDate.setDate(defaultDate.getDate() + 14);
-  const [startDate, setStartDate] = useState(defaultDate.toISOString().split('T')[0]);
+  const [startDate, setStartDate] = useState(getDefaultStartDate);
   
   const [tier, setTier] = useState<'Classic Explorer' | 'Signature Safari' | 'Ultra-Luxury Reserve'>('Signature Safari');
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>(['addon-boma-stargazing']);
 
-  const [leadTraveler, setLeadTraveler] = useState({
-    fullName: 'Alex Vance',
-    email: 'alex.vance@safari-voyage.com',
-    phone: '+1 (555) 234-8900',
-    countryOfResidence: 'United States',
-    dietaryNotes: 'Vegetarian friendly options appreciated',
-    specialRequests: 'Would love morning game drives focused on big cats',
-    guideLanguagePreference: 'English'
-  });
+  const [leadTraveler, setLeadTraveler] = useState(INITIAL_TRAVELER);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -61,6 +65,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [confirmedBooking, setConfirmedBooking] = useState<BookingConfirmation | null>(null);
 
   const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+
+  // Start from a fresh form every time the modal is opened
+  useEffect(() => {
+    if (isOpen) {
+      setStep(1);
+      setConfirmedBooking(null);
+      setSubmitError(null);
+      setIsSubmitting(false);
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -169,9 +183,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
       setConfirmedBooking(confirmation);
       setStep(4);
-    } catch (err: any) {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unknown error';
       console.error('Booking submission error:', err);
-      setSubmitError(err?.message || 'Error confirming booking. Please try again.');
+      setSubmitError(message || 'Error confirming booking. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -694,10 +709,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <SparkleButton
                   id="booking-step-confirm-btn"
                   onClick={handleConfirm}
+                  disabled={isSubmitting}
                   icon={<Sparkles className="w-3.5 h-3.5" />}
                   className="px-6 py-2.5 text-xs"
                 >
-                  {t.confirmBooking}
+                  {isSubmitting ? 'Confirming…' : t.confirmBooking}
                 </SparkleButton>
               )}
             </div>

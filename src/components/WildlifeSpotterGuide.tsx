@@ -11,7 +11,6 @@ import { TRANSLATIONS } from '../utils/translations';
 
 interface WildlifeSpotterGuideProps {
   currentLanguage: SupportedLanguage;
-  isDarkMode: boolean;
 }
 
 export const WildlifeSpotterGuide: React.FC<WildlifeSpotterGuideProps> = ({

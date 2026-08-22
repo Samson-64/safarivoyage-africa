@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   X, 
   MapPin, 
@@ -10,7 +10,7 @@ import {
   Utensils,
   Home
 } from 'lucide-react';
-import { TourPackage, Destination, SupportedLanguage, SupportedCurrency } from '../types';
+import { TourPackage, Destination, SupportedCurrency } from '../types';
 import { formatPrice } from '../utils/translations';
 import { SparkleButton } from './SparkleButton';
 
@@ -20,9 +20,7 @@ interface TourDetailsModalProps {
   tour?: TourPackage | null;
   destination?: Destination | null;
   onBookTour: (tour?: TourPackage | null, destination?: Destination | null) => void;
-  currentLanguage: SupportedLanguage;
   currentCurrency: SupportedCurrency;
-  isDarkMode: boolean;
 }
 
 export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
@@ -33,6 +31,16 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
   onBookTour,
   currentCurrency,
 }) => {
+  // Close on Escape key press
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen || (!tour && !destination)) return null;
 
   const title = tour ? tour.title : destination?.name || '';
@@ -43,9 +51,13 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
   const reviewsCount = tour ? tour.reviewsCount : destination?.reviewsCount || 500;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/85">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/85"
+      onClick={onClose}
+    >
       <div 
         id="tour-details-modal-card"
+        onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-4xl rounded-2xl border border-white/15 bg-[#14151a] text-white shadow-2xl overflow-hidden my-8"
       >
         {/* Header Hero Image */}
@@ -125,7 +137,9 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
                   <div key={day.day} className="relative pl-8 space-y-1">
                     <div className="absolute left-1.5 top-1.5 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-white" />
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-bold font-mono text-white">DAY 0{day.day}</span>
+                      <span className="text-[11px] font-bold font-mono text-white">
+                        DAY {day.day.toString().padStart(2, '0')}
+                      </span>
                       <h4 className="font-bold text-xs uppercase text-white">{day.title}</h4>
                     </div>
                     <p className="text-xs text-white/85 font-normal leading-relaxed">

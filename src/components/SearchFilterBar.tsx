@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { 
-  Search, 
-  SlidersHorizontal, 
-  RotateCcw, 
-  MapPin, 
-  Calendar, 
-  DollarSign, 
+import {
+  Search,
+  SlidersHorizontal,
+  RotateCcw,
+  MapPin,
+  DollarSign,
   Activity,
   ArrowUpDown
 } from 'lucide-react';
@@ -19,7 +18,6 @@ interface SearchFilterBarProps {
   totalResultsCount: number;
   currentLanguage: SupportedLanguage;
   currentCurrency: SupportedCurrency;
-  isDarkMode: boolean;
 }
 
 const REGIONS: Region[] = [

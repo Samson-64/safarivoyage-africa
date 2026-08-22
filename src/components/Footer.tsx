@@ -12,7 +12,6 @@ import { SparkleButton } from './SparkleButton';
 
 interface FooterProps {
   currentLanguage: SupportedLanguage;
-  isDarkMode: boolean;
   onNavigateSection: (sectionId: string) => void;
 }
 
@@ -85,9 +84,10 @@ export const Footer: React.FC<FooterProps> = ({
               <SparkleButton
                 id="newsletter-subscribe-btn"
                 type="submit"
+                disabled={submitting}
                 className="px-6 py-2.5 text-xs shrink-0"
               >
-                {isSubscribed ? 'Subscribed!' : t.subscribeBtn}
+                {isSubscribed ? 'Subscribed!' : submitting ? 'Subscribing…' : t.subscribeBtn}
               </SparkleButton>
             </form>
 
@@ -124,7 +124,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li><button onClick={() => onNavigateSection('destinations-section')} className="hover:text-white transition-colors cursor-pointer">East Africa (Serengeti & Kili)</button></li>
               <li><button onClick={() => onNavigateSection('destinations-section')} className="hover:text-white transition-colors cursor-pointer">Southern Africa (Okavango & Victoria)</button></li>
               <li><button onClick={() => onNavigateSection('destinations-section')} className="hover:text-white transition-colors cursor-pointer">North Africa (Nile & Sahara)</button></li>
-              <li><button onClick={() => onNavigateSection('destinations-section')} className="hover:text-white transition-colors cursor-pointer">Namib Red Dune Expeditons</button></li>
+              <li><button onClick={() => onNavigateSection('destinations-section')} className="hover:text-white transition-colors cursor-pointer">Namib Red Dune Expeditions</button></li>
               <li><button onClick={() => onNavigateSection('destinations-section')} className="hover:text-white transition-colors cursor-pointer">Zanzibar & Spice Archipelago</button></li>
             </ul>
           </div>

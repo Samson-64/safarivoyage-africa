@@ -122,5 +122,4 @@ export interface FilterState {
   selectedDifficulty: string;
   maxBudgetUSD: number;
   sortBy: 'popular' | 'price-asc' | 'price-desc' | 'rating' | 'duration';
-  onlyFeatured: boolean;
 }

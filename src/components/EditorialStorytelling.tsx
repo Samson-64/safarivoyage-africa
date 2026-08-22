@@ -1,14 +1,8 @@
 import React from 'react';
 import { EDITORIAL_STORIES } from '../data/africanData';
-import { SupportedLanguage } from '../types';
 import { Quote, CheckCircle } from 'lucide-react';
 
-interface EditorialStorytellingProps {
-  currentLanguage: SupportedLanguage;
-  isDarkMode: boolean;
-}
-
-export const EditorialStorytelling: React.FC<EditorialStorytellingProps> = () => {
+export const EditorialStorytelling: React.FC = () => {
   return (
     <section id="stories-section" className="space-y-16 py-12">
       {/* Section Header */}
@@ -29,9 +23,7 @@ export const EditorialStorytelling: React.FC<EditorialStorytellingProps> = () =>
           return (
             <div
               key={story.number}
-              className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
-                isEven ? 'lg:flex-row-reverse' : ''
-              }`}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
               {/* Text Editorial Column */}
               <div className={`lg:col-span-6 space-y-5 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
