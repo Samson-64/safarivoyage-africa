@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Defensive safeguard: Ensure window.fetch is configurable with a setter so polyfills do not throw
+      (function() {
+        try {
+          var originalFetch = window.fetch ? window.fetch.bind(window) : null;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return currentFetch; },
+            set: function(fn) { currentFetch = fn; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+      })();
+    </script>
+    <title>SafariVoyage Africa — Luxury Expeditions & Guided Tours</title>
+    <meta name="description" content="Immerse in the untamed wonders of Africa. Discover legendary safaris, mountain expeditions, cultural heritage, and book authentic guided adventures across the continent." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <meta property="og:title" content="SafariVoyage Africa — Luxury Expeditions & Guided Tours" />
+    <meta property="og:description" content="Discover Africa's most breathtaking wildlife safaris, ancient monuments, and guided cultural journeys." />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="bg-neutral-900 text-neutral-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

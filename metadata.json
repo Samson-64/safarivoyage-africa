@@ -1,0 +1,6 @@
+{
+  "name": "SafariVoyage Africa",
+  "description": "Premium African tourism platform showcasing iconic wonders, guided safaris, local expeditions, dynamic discovery filters, and direct tour booking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
