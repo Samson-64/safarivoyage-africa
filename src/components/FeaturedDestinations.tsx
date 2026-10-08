@@ -27,6 +27,7 @@ interface DestinationCardProps {
   onSelectDestination: (dest: Destination) => void;
   onBookTour: (dest: Destination) => void;
   currentCurrency: SupportedCurrency;
+  bookLabel: string;
 }
 
 const DestinationCard: React.FC<DestinationCardProps> = ({
@@ -37,6 +38,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   onSelectDestination,
   onBookTour,
   currentCurrency,
+  bookLabel,
 }) => {
   // Up to 3 images for the 3-dot pagination carousel (padded with the hero
   // image so there are always exactly 3 slides)
@@ -47,8 +49,6 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Get primary activities & tags for the frosted pills
-  const primaryActivity = dest.activities?.[0] || 'Savanna Safari';
   const secondaryTag = dest.highlightBadge || dest.region;
 
   return (
@@ -58,7 +58,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.45, delay: index * 0.06 }}
-      className="group/card relative rounded-[32px] sm:rounded-[36px] overflow-hidden border border-white/10 shadow-2xl min-h-[530px] sm:min-h-[560px] flex flex-col justify-between p-5 sm:p-6 bg-[#14151a]"
+      className="group/card relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl min-h-[500px] sm:min-h-[530px] flex flex-col justify-between p-5 sm:p-6 bg-[#14151a]"
     >
       {/* Background Image Slides with AnimatePresence */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#0d0e11]">
@@ -150,48 +150,34 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
           </h3>
         </div>
 
-        {/* Description matching the reference typography */}
+        {/* Description */}
         <p 
           onClick={() => onSelectDestination(dest)}
-          className="text-xs sm:text-sm text-white/85 leading-relaxed font-normal line-clamp-3 cursor-pointer"
+          className="text-xs sm:text-sm text-white/80 leading-relaxed font-normal line-clamp-2 cursor-pointer"
         >
           {dest.description}
         </p>
 
-        {/* Tags & Price Row */}
-        <div className="flex items-center gap-2 flex-wrap pt-1">
-          {/* Pill 1: Activity */}
-          <div 
-            id={`dest-pill-activity-${dest.id}`}
-            className="px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/10 text-white text-xs font-medium"
-          >
-            {primaryActivity}
-          </div>
-
-          {/* Pill 2: Highlight Tag */}
-          <div 
-            id={`dest-pill-tag-${dest.id}`}
-            className="px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/10 text-white text-xs font-medium"
-          >
+        {/* Highlight + Price */}
+        <div className="flex items-center justify-between gap-3 pt-1">
+          <span className="text-[11px] uppercase tracking-wider text-white/60">
             {secondaryTag}
-          </div>
-
-          {/* Price Badge: Solid Black Pill on Right */}
-          <div 
+          </span>
+          <span
             id={`dest-price-badge-${dest.id}`}
-            className="ml-auto px-4 py-1.5 rounded-full bg-black text-white text-xs sm:text-sm font-bold tracking-tight border border-white/15 flex items-center gap-1 shadow-md"
+            className="text-sm font-bold text-white tabular-nums"
           >
-            <span>{formatPrice(dest.startingPriceUSD, currentCurrency)}</span>
-          </div>
+            {formatPrice(dest.startingPriceUSD, currentCurrency)}
+          </span>
         </div>
 
-        {/* Full-Width Reserve Now Button matching exact reference CTA */}
+        {/* Full-Width Reserve CTA */}
         <SparkleButton
           id={`reserve-now-btn-${dest.id}`}
           onClick={() => onBookTour(dest)}
-          className="w-full py-3.5 sm:py-4 text-sm sm:text-base"
+          className="w-full py-3.5 sm:py-4 text-sm"
         >
-          Reserve Now
+          {bookLabel}
         </SparkleButton>
 
       </div>
@@ -223,23 +209,9 @@ export const FeaturedDestinations: React.FC<FeaturedDestinationsProps> = ({
   return (
     <section id="destinations-section" className="space-y-8">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs font-mono font-bold text-white">01</span>
-            <div className="w-6 h-[1px] bg-white/40" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
-              SACRED AFRICAN LANDSCAPES
-            </span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white uppercase">
-            Top Attractions & Wonders
-          </h2>
-        </div>
-        <p className="text-xs sm:text-sm text-white/85 max-w-md font-normal leading-relaxed">
-          Explore UNESCO World Heritage wonders, pristine national parks, and untamed natural sanctuaries preserved across Africa.
-        </p>
-      </div>
+      <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+        Featured destinations
+      </h2>
 
       {/* Destination Grid with New Card UI/UX Design */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -253,6 +225,7 @@ export const FeaturedDestinations: React.FC<FeaturedDestinationsProps> = ({
             onSelectDestination={onSelectDestination}
             onBookTour={onBookTour}
             currentCurrency={currentCurrency}
+            bookLabel={t.bookDirectTour}
           />
         ))}
       </div>

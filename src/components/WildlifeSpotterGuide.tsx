@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  Sparkles, 
   MapPin, 
-  Clock, 
-  Info
+  Clock
 } from 'lucide-react';
 import { BIG_FIVE_WILDLIFE } from '../data/africanData';
 import { SupportedLanguage } from '../types';
@@ -22,23 +20,9 @@ export const WildlifeSpotterGuide: React.FC<WildlifeSpotterGuideProps> = ({
   return (
     <section id="big-five-section" className="space-y-6 pt-4">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="text-xs font-mono font-bold text-white">03</span>
-            <div className="w-6 h-[1px] bg-white/40" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
-              SAVANNA WILDLIFE GUIDE
-            </span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">
-            {t.bigFiveTitle}
-          </h2>
-        </div>
-        <p className="text-xs sm:text-sm text-white/85 max-w-md font-normal leading-relaxed">
-          {t.bigFiveSubtitle}
-        </p>
-      </div>
+      <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+        {t.bigFiveTitle}
+      </h2>
 
       {/* Interactive Big 5 Selector Buttons */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
@@ -49,9 +33,10 @@ export const WildlifeSpotterGuide: React.FC<WildlifeSpotterGuideProps> = ({
               key={animal.id}
               id={`wildlife-tab-${animal.id}`}
               onClick={() => setSelectedAnimal(animal)}
-              className={`p-3 rounded-2xl border transition-all text-left flex items-center gap-3 cursor-pointer shadow-md ${
+              aria-pressed={isSelected}
+              className={`p-3 rounded-2xl border transition-all text-left flex items-center gap-3 cursor-pointer ${
                 isSelected
-                  ? 'bg-white text-black border-white font-bold'
+                  ? 'bg-white text-black border-white'
                   : 'bg-[#14151a] border-white/15 text-white/80 hover:border-white/40 hover:text-white'
               }`}
             >
@@ -89,72 +74,55 @@ export const WildlifeSpotterGuide: React.FC<WildlifeSpotterGuideProps> = ({
           <div className="absolute inset-0 bg-[#0d0e11]/50" />
           
           <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-            <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
+            <span className="inline-block px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/15 text-white text-[10px] font-semibold uppercase tracking-wider">
               {selectedAnimal.status}
             </span>
-            <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
+            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">
               {selectedAnimal.name}
             </h3>
-            <p className="text-xs font-mono text-white/80 italic">
+            <p className="text-xs font-mono text-white/70 italic">
               {selectedAnimal.scientificName}
             </p>
           </div>
         </div>
 
         {/* Animal Intel Right */}
-        <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between gap-6">
           
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-[10px] text-white font-bold uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>NATURALIST HABITAT & FIELD DOSSIER</span>
-            </div>
-
-            <p className="text-xs sm:text-sm text-white/85 leading-relaxed font-normal">
+          <div className="space-y-5">
+            <p className="text-sm text-white/80 leading-relaxed font-normal">
               {selectedAnimal.description}
             </p>
 
-            {/* Grid of Intel */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              <div className="p-4 rounded-xl border border-white/15 bg-[#181920]">
-                <div className="flex items-center gap-2 text-[10px] font-bold text-white uppercase tracking-wider mb-1">
-                  <MapPin className="w-3 h-3 text-white" />
-                  <span>Prime Habitats</span>
-                </div>
-                <p className="text-xs text-white/85 leading-relaxed">
-                  {selectedAnimal.habitat}
-                </p>
+            {/* Compact fact rows */}
+            <dl className="space-y-3">
+              <div className="flex items-start gap-3 text-xs">
+                <dt className="flex items-center gap-1.5 w-36 shrink-0 text-white/50 uppercase tracking-wider font-semibold">
+                  <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>Habitats</span>
+                </dt>
+                <dd className="text-white/85 leading-relaxed">{selectedAnimal.habitat}</dd>
               </div>
+              <div className="flex items-start gap-3 text-xs">
+                <dt className="flex items-center gap-1.5 w-36 shrink-0 text-white/50 uppercase tracking-wider font-semibold">
+                  <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>Best seen</span>
+                </dt>
+                <dd className="text-white/85 leading-relaxed">{selectedAnimal.bestTime}</dd>
+              </div>
+            </dl>
 
-              <div className="p-4 rounded-xl border border-white/15 bg-[#181920]">
-                <div className="flex items-center gap-2 text-[10px] font-bold text-white uppercase tracking-wider mb-1">
-                  <Clock className="w-3 h-3 text-white" />
-                  <span>Best Tracking Windows</span>
-                </div>
-                <p className="text-xs text-white/85 leading-relaxed">
-                  {selectedAnimal.bestTime}
-                </p>
-              </div>
-            </div>
-
-            {/* Field Note Box */}
-            <div className="p-4 rounded-xl bg-[#181920] border border-white/15 flex items-start gap-3">
-              <Info className="w-4 h-4 text-white shrink-0 mt-0.5" />
-              <div>
-                <span className="block text-[10px] font-bold text-white uppercase tracking-wider mb-0.5">
-                  Safari Naturalist Note
-                </span>
-                <p className="text-xs text-white/85 italic leading-relaxed">
-                  "{selectedAnimal.funFact}"
-                </p>
-              </div>
-            </div>
+            {/* Field note */}
+            <p className="text-xs text-white/70 italic leading-relaxed">
+              <span className="not-italic font-semibold text-white/85">Field note: </span>
+              {selectedAnimal.funFact}
+            </p>
           </div>
 
           {/* Bottom Wildlife Code of Ethics */}
-          <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/70">
-            <span>All sightings strictly maintain ethical distance protocols.</span>
-            <span className="text-white font-bold uppercase tracking-wider text-[10px]">100% Protected Reserves</span>
+          <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/60">
+            <span>All sightings keep a strict ethical distance.</span>
+            <span className="text-white/90 font-semibold uppercase tracking-wider text-[10px]">Protected reserves only</span>
           </div>
 
         </div>

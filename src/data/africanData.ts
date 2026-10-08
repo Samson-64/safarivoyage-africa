@@ -8,7 +8,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Tanzania',
     region: 'East Africa',
     tagline: 'The Greatest Wildlife Theater on Earth',
-    description: 'Witness over two million wildebeest, zebras, and gazelles traverse the endless golden plains in the Great Migration, stalked by Africa\'s highest density of big cats and prehistoric volcanic calderas.',
+    description: 'Two million wildebeest cross the golden plains each year, stalked by Africa’s densest population of big cats.',
     heroImage: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80',
@@ -34,7 +34,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Zimbabwe / Zambia',
     region: 'Southern Africa',
     tagline: 'Earth\'s Mightiest Curtain of Falling Water',
-    description: 'A colossal sheet of roaring water plunging 108 meters into a basalt gorge. Feel the perpetual mist, watch double rainbows arch over emerald rainforests, and cruise the untamed Zambezi at sunset.',
+    description: 'A 108-meter wall of water drops into a basalt gorge, wrapped in permanent mist and double rainbows.',
     heroImage: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=800&q=80',
@@ -59,7 +59,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Egypt',
     region: 'North Africa',
     tagline: '5,000 Years of Timeless Pharaohs & Starlit Feluccas',
-    description: 'Stand at the foot of the Great Pyramid of Khufu, gaze into the timeless eyes of the Sphinx, and drift down the ancient Nile River aboard traditional wooden feluccas beneath desert constellations.',
+    description: 'Stand beneath the Great Pyramid, meet the Sphinx, and sail the Nile by felucca under desert stars.',
     heroImage: 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=800&q=80',
@@ -84,7 +84,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Botswana',
     region: 'Southern Africa',
     tagline: 'A Lush Eden of Crystal Waterways & Gentle Giants',
-    description: 'The world\'s premier pristine wetland oasis. Glide noiselessly through papyrus channels in a traditional dugout mokoro canoe while elephants swim alongside and leopard prowl mopane woodlands.',
+    description: 'Glide through papyrus channels in a dugout mokoro while elephants swim alongside and leopards prowl the banks.',
     heroImage: 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
@@ -109,7 +109,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Tanzania',
     region: 'East Africa',
     tagline: 'The Roof of Africa Rising Above the Clouds',
-    description: 'The highest freestanding volcanic mountain on planet Earth. Journey through five distinct climatic ecosystems—from lush rainforest and alpine moorland to arctic glacial peaks.',
+    description: 'Africa’s highest peak, rising through five climate zones from rainforest to arctic glacier.',
     heroImage: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=800&q=80',
@@ -134,7 +134,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Namibia',
     region: 'Southern Africa',
     tagline: 'The Oldest Desert on Earth with Red Star Dunes',
-    description: 'Immerse in the surreal crimson dunes of the Namib Desert. Climb Dune 45 at dawn, walk among 900-year-old scorched camel thorn trees in Deadvlei, and stargaze in the world\'s darkest certified Dark Sky Reserve.',
+    description: 'Climb crimson dunes at dawn, walk the dead trees of Deadvlei, and stargaze in a Dark Sky Reserve.',
     heroImage: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
@@ -159,7 +159,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Uganda / Rwanda',
     region: 'East Africa',
     tagline: 'Eye-to-Eye Encounters with Endangered Mountain Gorillas',
-    description: 'Trek through ancient mist-shrouded afro-montane jungles to sit quietly among gentle mountain gorilla families, golden monkeys, and indigenous Batwa forest keepers in the heart of Africa.',
+    description: 'Trek mist-shrouded jungle to sit quietly among mountain gorilla families and golden monkeys.',
     heroImage: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=800&q=80'
@@ -183,7 +183,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Tanzania',
     region: 'East Africa',
     tagline: 'Turquoise Coral Lagoons & Swahili Sultan Palaces',
-    description: 'Wander through fragrant clove plantations, carved teak Swahili doorways, and powdery white sand beaches bordering coral reefs teeming with dolphins, sea turtles, and traditional dhow sailboats.',
+    description: 'Clove plantations, carved Swahili doorways, and white-sand beaches over coral reefs alive with sea turtles.',
     heroImage: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
@@ -207,7 +207,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'Morocco',
     region: 'North Africa',
     tagline: 'Vibrant Ochre Palaces & Berber Mountain Trails',
-    description: 'Lose yourself in the sensory wonderland of Jemaa el-Fnaa, stay in ornate riad courtyards lined with zellij tiles, and trek through ancient Berber villages nestled in the snow-dusted High Atlas ranges.',
+    description: 'Haggle in Jemaa el-Fnaa, sleep in a tiled riad, and trek Berber villages in the High Atlas.',
     heroImage: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80'
@@ -222,7 +222,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     longitude: -7.9811,
     highlights: ['Bahia Palace & Jardin Majorelle', 'Atlas Berber Homestay & Tagine Cooking', 'Ourika Valley Waterfalls Hike', 'Agafay Desert Glamping & Stargazing'],
     climate: 'Mediterranean Continental (16°C - 30°C)',
-    localCultureTip: 'Fresh mint tea is called "Berber Whiskey" — poured from high above to create a frothy crown of hospitality.'
+    localCultureTip: 'Fresh mint tea is called "Berber Whiskey", poured from high above to create a frothy crown of hospitality.'
   },
   {
     id: 'cape-town-south-africa',
@@ -231,7 +231,7 @@ export const AFRICAN_DESTINATIONS: Destination[] = [
     country: 'South Africa',
     region: 'Southern Africa',
     tagline: 'Where Majestic Oceans & Mountain Pinnacles Collide',
-    description: 'Ride the rotating cable car up Table Mountain, watch African penguins waddle on Boulders Beach, and cruise along the iconic Chapman\'s Peak Drive into the historic Stellenbosch winelands.',
+    description: 'Ride the cable car up Table Mountain, meet penguins at Boulders Beach, and drive Chapman’s Peak to the winelands.',
     heroImage: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=1600&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
@@ -266,7 +266,7 @@ export const AFRICAN_TOURS: TourPackage[] = [
     reviewsCount: 420,
     groupSizeMax: 6,
     coverImage: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80',
-    shortSummary: 'Follow the epic Mara River crossing with private 4x4 pop-top Land Cruisers, expert certified Maasai trackers, and 5-star eco-tented camps under the starlit savanna.',
+    shortSummary: 'Follow the Mara River crossing with Maasai trackers and starlit eco-camps.',
     itinerary: [
       { day: 1, title: 'Arrival in Arusha & Safari Briefing', description: 'Meet your guide at Kilimanjaro International Airport. Rest at a lush coffee lodge in Arusha.', accommodation: 'Arusha Coffee Lodge', mealsIncluded: 'Dinner' },
       { day: 2, title: 'Tarangire National Park - Kingdom of Elephants', description: 'Game drive through ancient Baobab forests home to over 3,000 elephants and tree-climbing lions.', accommodation: 'Tarangire Safari Camp', mealsIncluded: 'Breakfast, Bush Lunch, Dinner' },
@@ -309,7 +309,7 @@ export const AFRICAN_TOURS: TourPackage[] = [
     reviewsCount: 310,
     groupSizeMax: 10,
     coverImage: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?auto=format&fit=crop&w=1200&q=80',
-    shortSummary: 'The highest success rate (96%) summit trek on Kilimanjaro. Traverse virgin rainforests, the dramatic Shira Plateau, and Barranco Wall to conquer Uhuru Peak.',
+    shortSummary: 'A high-success summit via rainforest, Shira Plateau, and the Barranco Wall.',
     itinerary: [
       { day: 1, title: 'Londorossi Gate to Mti Mkubwa (2,650m)', description: 'Trek through dense montane cloud forests with black-and-white colobus monkeys.', accommodation: 'Mountain Expedition Tents', mealsIncluded: 'Lunch, Dinner' },
       { day: 2, title: 'Mti Mkubwa to Shira 1 Camp (3,610m)', description: 'Cross into the heather and moorland zone with panoramic views of the western breach.', accommodation: 'Mountain Expedition Tents', mealsIncluded: 'All Meals' },
@@ -348,7 +348,7 @@ export const AFRICAN_TOURS: TourPackage[] = [
     reviewsCount: 185,
     groupSizeMax: 6,
     coverImage: 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=80',
-    shortSummary: 'Glide in handmade mokoros through crystalline water lilies, encounter swimming elephant herds on private boat safaris, and sleep in open-sided luxury canvas pavilions.',
+    shortSummary: 'Handmade mokoro rides, private boat safaris, and open-sided canvas pavilions.',
     itinerary: [
       { day: 1, title: 'Fly into Maun & Helicopter Transfer to Delta Camp', description: 'Scenic flight over water channels dotted with hippo pods.', accommodation: 'Sanctuary Chief\'s Camp', mealsIncluded: 'Dinner' },
       { day: 2, title: 'Mokoro Canoe Trails & Walking Safari', description: 'Silent poling through lily-filled channels and tracking wildlife footprints on secluded islands.', accommodation: 'Sanctuary Chief\'s Camp', mealsIncluded: 'All Meals' },
@@ -383,7 +383,7 @@ export const AFRICAN_TOURS: TourPackage[] = [
     reviewsCount: 540,
     groupSizeMax: 12,
     coverImage: 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=80',
-    shortSummary: 'Private Egyptologist guidance through the Pyramids of Giza, the Grand Egyptian Museum, Luxor & Karnak Temples, and a 4-night luxury river cruise between Aswan and Luxor.',
+    shortSummary: 'Private Egyptologist guiding plus a 4-night cruise between Aswan and Luxor.',
     itinerary: [
       { day: 1, title: 'Welcome to Cairo & Private Transfer', description: 'VIP greeting at Cairo airport, private transfer to historic Nile-view hotel.', accommodation: 'Marriott Mena House Cairo', mealsIncluded: 'Dinner' },
       { day: 2, title: 'The Great Pyramids & The Sphinx of Giza', description: 'Walk around Khufu, Khafre, Menkaure pyramids with special access into the Sphinx enclosure.', accommodation: 'Marriott Mena House Cairo', mealsIncluded: 'Breakfast, Lunch' },
@@ -420,7 +420,7 @@ export const AFRICAN_TOURS: TourPackage[] = [
     reviewsCount: 220,
     groupSizeMax: 8,
     coverImage: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
-    shortSummary: 'Traverse the world’s most cinematic desert landscapes: giant apricot sand dunes, the iconic white clay pan of Deadvlei, and shipwreck-strewn Atlantic coastlines.',
+    shortSummary: 'Apricot dunes, the white clay pan of Deadvlei, and shipwreck coastlines.',
     itinerary: [
       { day: 1, title: 'Windhoek to Namib Desert', description: 'Scenic drive descending the Great Escarpment into the ancient red sands of Sossusvlei.', accommodation: 'Desert Hills Luxury Lodge', mealsIncluded: 'Dinner' },
       { day: 2, title: 'Sunrise on Big Daddy Dune & Deadvlei', description: 'Climb 325-meter dunes before sunrise and walk among 900-year-old preserved acacia trees.', accommodation: 'Desert Hills Luxury Lodge', mealsIncluded: 'All Meals' },
@@ -455,7 +455,7 @@ export const AFRICAN_TOURS: TourPackage[] = [
     reviewsCount: 340,
     groupSizeMax: 6,
     coverImage: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=1200&q=80',
-    shortSummary: 'Spend an unforgettable hour inches away from wild silverback gorillas in Bwindi Impenetrable Jungle, combined with chimpanzee tracking in Kibale Forest.',
+    shortSummary: 'An hour with wild silverback gorillas, plus chimpanzee tracking in Kibale.',
     itinerary: [
       { day: 1, title: 'Entebbe to Bwindi via Scenic Flight', description: 'Bush plane flight over emerald tea plantations and volcanic crater lakes to Kihihi airstrip.', accommodation: 'Bwindi Volcanoes Lodge', mealsIncluded: 'Lunch, Dinner' },
       { day: 2, title: 'The Gorilla Encounter Day in Bwindi', description: 'Trek through tangled jungle vines with rangers to meet a habituated gorilla family up close.', accommodation: 'Bwindi Volcanoes Lodge', mealsIncluded: 'All Meals' },
@@ -489,7 +489,7 @@ export const AFRICAN_TOURS: TourPackage[] = [
     reviewsCount: 460,
     groupSizeMax: 10,
     coverImage: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80',
-    shortSummary: 'A tropical dream of azure Indian Ocean waters, swimming with wild dolphins at Mnemba Atoll, organic spice tastings, and candlelit seafood dinners on sandbanks.',
+    shortSummary: 'Swim with dolphins at Mnemba Atoll, taste organic spices, dine on sandbanks.',
     itinerary: [
       { day: 1, title: 'Welcome to Stone Town Sultan Quarters', description: 'Check into a restored 19th-century Arab-Swahili palace riad with Persian chandeliers.', accommodation: 'Emerson on Hurumzi Palace', mealsIncluded: 'Dinner' },
       { day: 2, title: 'Spices, Hidden Alleyways & Freddie Mercury House', description: 'Sensory tour smelling fresh vanilla pods, nutmeg, cloves, and historic Stone Town walk.', accommodation: 'Emerson on Hurumzi Palace', mealsIncluded: 'Breakfast, Swahili Lunch' },
@@ -522,7 +522,7 @@ export const AFRICAN_TOURS: TourPackage[] = [
     reviewsCount: 680,
     groupSizeMax: 8,
     coverImage: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80',
-    shortSummary: 'Traverse the dramatic Tizi n\'Tichka mountain pass to UNESCO Ait Benhaddou, ride camels into Erg Chebbi golden dunes, and sleep in heated royal Berber tents.',
+    shortSummary: 'Cross the Tizi n\'Tichka pass, ride Erg Chebbi dunes, sleep in Berber tents.',
     itinerary: [
       { day: 1, title: 'Marrakech Arrival & Medina Welcome Riad', description: 'Arrive in Marrakech, mint tea welcome ceremony in historic garden courtyard.', accommodation: 'Riad Kniza Marrakech', mealsIncluded: 'Dinner' },
       { day: 2, title: 'Marrakech Hidden Palaces & Artisan Souks', description: 'Explore Bahia Palace, Saadian Tombs, and master leather and brass workshops.', accommodation: 'Riad Kniza Marrakech', mealsIncluded: 'Breakfast, Lunch' },
@@ -629,7 +629,7 @@ export const BIG_FIVE_WILDLIFE = [
     description: 'Prehistoric armored giants preserved through high-tech ranger patrols. Black rhinos are browsers with hooked lips; white rhinos are gentle grazers with square lips.',
     habitat: 'Ngorongoro Crater, Ol Pejeta Conservancy, Lewa Wildlife Conservancy & Etosha',
     bestTime: 'Early morning waterhole visits',
-    funFact: 'Rhino horns are composed purely of keratin — the exact same protein found in human hair and fingernails!',
+    funFact: 'Rhino horns are composed purely of keratin, the exact same protein found in human hair and fingernails!',
     image: 'https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=800&q=80'
   },
   {
@@ -640,7 +640,7 @@ export const BIG_FIVE_WILDLIFE = [
     description: 'Fiercely protective and legendary for their heavy curved horns fused into a continuous bone shield called a "boss". Never domesticated.',
     habitat: 'Kruger National Park, Serengeti, Queen Elizabeth Park & Chobe',
     bestTime: 'Cool mornings grazing in large herds of hundreds',
-    funFact: 'Cape buffalo herds practice collective democracy: when deciding where to move, females stand, look in their preferred direction, and the majority direction is chosen!',
+    funFact: 'Cape buffalo herds vote before moving: females look toward their preferred direction and the majority way wins!',
     image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=800&q=80'
   }
 ];
@@ -651,8 +651,8 @@ export const EDITORIAL_STORIES = [
     category: 'WILDLIFE EXPEDITIONS',
     title: 'The Great Migration: Earth\'s Most Ancient Pulse',
     subtitle: 'Where millions of thundering hooves obey ancestral instincts across the Serengeti-Mara ecosystem.',
-    body: 'There is a rhythm to the African continent that predates recorded history. Each year, over 1.5 million wildebeest and hundreds of thousands of zebras and gazelles trace a 1,000-kilometer clockwise pilgrimage following life-giving rains. Standing on the precipice of the Mara River as thousands leap into churning waters is not merely sightseeing—it is an encounter with the raw, untamed heartbeat of nature.',
-    quote: 'In Africa, you do not just observe wildlife—you remember what it felt like when humanity was part of it.',
+    body: 'Each year 1.5 million wildebeest follow the rains around a 1,000-kilometer loop. Thousands leaping into the churning Mara River is the continent’s oldest rhythm on display.',
+    quote: 'In Africa, you do not just observe wildlife. You remember what it felt like when humanity was part of it.',
     author: 'Juma Mwangi, Senior Safari Naturalist (24 years in the Mara)',
     image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80',
     stats: [
@@ -666,7 +666,7 @@ export const EDITORIAL_STORIES = [
     category: 'INDIGENOUS WISDOM & TRADITION',
     title: 'Keepers of the Land: Living in Harmony with Giants',
     subtitle: 'Honoring the deep cultural heritage of the Maasai, Samburu, San, and Berber communities.',
-    body: 'True African tourism is rooted in genuine respect for the indigenous peoples who have stewarded these pristine ecosystems for thousands of years. Through community-owned conservancies, our travelers sit beside Maasai elders around evening fires, learning tracking techniques passed down through oral traditions and discovering how sustainable tourism directly empowers village schools, water wells, and women\'s artisan collectives.',
+    body: 'Community-owned conservancies put travelers beside Maasai elders around evening fires. Every booking funds village schools, water wells, and women’s artisan collectives.',
     quote: 'We do not inherit the earth from our ancestors; we borrow it from our children.',
     author: 'Naisula Leshore, Community Conservation Director',
     image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80',
@@ -681,7 +681,7 @@ export const EDITORIAL_STORIES = [
     category: 'SUSTAINABLE LUXURY ECO-LODGES',
     title: 'Under the Milky Way: 100% Solar & Zero-Footprint Lodges',
     subtitle: 'Uncompromising luxury where private plunge pools meet completely off-grid solar architecture.',
-    body: 'Imagine drifting to sleep in a hand-crafted canvas suite with open star-beds on elevated wooden decks, serenaded by the nocturnal calls of lions and tree hyraxes. Our partner lodges are 100% solar-powered, use bio-digester water purification, ban single-use plastics, and serve organic produce grown by neighboring smallholder farmers.',
+    body: 'Partner lodges run entirely on solar power, ban single-use plastics, and serve produce from neighboring farms. Guests sleep on elevated decks under open star-filled skies.',
     quote: 'Luxury is silence, space, and a sky filled with infinite stars untouched by city glow.',
     author: 'Safari Architecture & Sustainability Council',
     image: 'https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1200&q=80',

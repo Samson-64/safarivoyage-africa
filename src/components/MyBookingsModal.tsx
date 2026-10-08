@@ -76,10 +76,10 @@ export const MyBookingsModal: React.FC<MyBookingsModalProps> = ({
               <Compass className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-white/70 block">
-                EXPEDITION PORTAL
+              <span className="text-[10px] font-semibold tracking-[0.18em] text-[#c4a57b] block">
+                SafariVoyage Africa
               </span>
-              <h3 className="text-base sm:text-lg font-bold uppercase leading-tight text-white">
+              <h3 className="text-base sm:text-lg font-semibold leading-tight text-white">
                 My Booked Safaris & Passes
               </h3>
             </div>
@@ -117,7 +117,7 @@ export const MyBookingsModal: React.FC<MyBookingsModalProps> = ({
           ) : bookings.length === 0 ? (
             <div className="text-center py-12 space-y-4 max-w-md mx-auto">
               <CheckCircle2 className="w-10 h-10 text-white/40 mx-auto" />
-              <h4 className="text-base font-bold uppercase text-white">No active reservations yet</h4>
+              <h4 className="text-base font-semibold text-white">No active reservations yet</h4>
               <p className="text-xs text-white/70">
                 You haven't confirmed any safari expeditions yet. Explore our iconic African destinations and secure your private itinerary with direct instant confirmation.
               </p>
@@ -150,7 +150,7 @@ export const MyBookingsModal: React.FC<MyBookingsModalProps> = ({
                           {b.bookingCode}
                         </span>
                       </div>
-                      <h4 className="text-sm font-bold uppercase text-white mt-1">
+                      <h4 className="text-sm font-semibold text-white mt-1">
                         {b.tourTitle}
                       </h4>
                     </div>

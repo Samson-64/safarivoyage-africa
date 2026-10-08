@@ -152,7 +152,7 @@ export const SparkleButton: React.FC<SparkleButtonProps> = ({
       </motion.div>
 
       {/* Foreground Content: Text + Icon with sharp color transition */}
-      <span className={`relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 ${isHovered ? 'text-black' : 'text-white'} font-bold uppercase tracking-wider`}>
+      <span className={`relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 ${isHovered ? 'text-black' : 'text-white'} font-semibold`}>
         {icon}
         <span>{children}</span>
       </span>

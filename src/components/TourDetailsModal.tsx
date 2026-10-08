@@ -90,7 +90,7 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
               </span>
             </div>
 
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight text-white">
+            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-white">
               {title}
             </h2>
           </div>
@@ -127,9 +127,9 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
           {/* Day by Day Itinerary (if Tour) or Highlights (if Destination) */}
           {tour && tour.itinerary ? (
             <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-white flex items-center gap-2">
                 <Compass className="w-4 h-4 text-white" />
-                <span>Day-by-Day Expedition Itinerary</span>
+                <span>Day-by-day itinerary</span>
               </h3>
 
               <div className="space-y-4 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[1px] before:bg-white/20">
@@ -161,7 +161,7 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
             </div>
           ) : destination ? (
             <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-white">Attraction Dossier & Highlights</h3>
+              <h3 className="text-sm font-semibold text-white">Highlights</h3>
               <p className="text-xs sm:text-sm text-white/85 leading-relaxed font-normal">
                 {destination.description}
               </p>
@@ -177,7 +177,7 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
 
               {destination.localCultureTip && (
                 <div className="p-4 rounded-xl bg-[#181920] border border-white/15 text-xs text-white/85">
-                  <strong className="text-white uppercase tracking-wider text-[10px] block mb-1">Local Cultural Etiquette:</strong>
+                  <strong className="text-white text-[11px] font-semibold block mb-1">Local cultural etiquette</strong>
                   {destination.localCultureTip}
                 </div>
               )}
@@ -188,9 +188,9 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
           {tour && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/10">
               <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-white flex items-center gap-1.5">
+                <h4 className="text-xs font-semibold text-white flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-white" />
-                  <span>Included in Expedition</span>
+                  <span>Included in expedition</span>
                 </h4>
                 <ul className="space-y-1.5 text-xs text-white/85">
                   {tour.included.map((inc, i) => (
@@ -203,9 +203,9 @@ export const TourDetailsModal: React.FC<TourDetailsModalProps> = ({
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/50 flex items-center gap-1.5">
+                <h4 className="text-xs font-semibold text-white/50 flex items-center gap-1.5">
                   <AlertCircle className="w-3.5 h-3.5 text-white/50" />
-                  <span>Not Included</span>
+                  <span>Not included</span>
                 </h4>
                 <ul className="space-y-1.5 text-xs text-white/50">
                   {tour.notIncluded.map((not, i) => (

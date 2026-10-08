@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useScroll, useMotionValueEvent } from 'motion/react';
 import { 
   Globe, 
   DollarSign, 
@@ -86,13 +87,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setIsScrolled(latest > 40);
+  });
 
   // Close any open dropdown when clicking outside or pressing Escape
   useEffect(() => {
@@ -125,8 +123,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       id="main-navbar-header"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-[#0d0e11] border-b border-[#21232a] py-3.5' 
-          : 'bg-[#0d0e11]/90 backdrop-blur-sm border-b border-[#1c1e24] py-5'
+          ? 'bg-[#0d0e11]/85 backdrop-blur-md border-b border-white/10 py-3'
+          : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -135,48 +133,48 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           id="nav-brand-logo-button"
           onClick={() => onNavigateSection('hero-section')}
-          className="flex items-center gap-3 text-left group focus:outline-none"
+          className="flex items-center gap-3 text-left group"
         >
-          <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all">
+          <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover:bg-[#c4a57b] group-hover:text-black group-hover:border-[#c4a57b] transition-all">
             <ElephantHeadIcon className="w-4 h-4" />
           </div>
           <div>
-            <span className="block text-[10px] font-bold tracking-[0.25em] text-white/70 uppercase">
+            <span className="block text-[9px] font-semibold tracking-[0.22em] text-white/60 uppercase">
               {t.brandTag}
             </span>
-            <span className="block font-bold text-lg sm:text-xl tracking-wider text-white">
+            <span className="block font-bold text-lg tracking-tight text-white">
               SAFARI<span className="text-white/60">.VOYAGE</span>
             </span>
           </div>
         </button>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-8">
+        <nav className="hidden lg:flex items-center space-x-7">
           <button 
             id="nav-link-destinations"
             onClick={() => onNavigateSection('destinations-section')}
-            className="text-xs uppercase font-semibold tracking-wider text-white/80 hover:text-white transition-colors"
+            className="text-sm font-medium text-white/75 hover:text-[#c4a57b] transition-colors"
           >
             {t.navDestinations}
           </button>
           <button 
             id="nav-link-tours"
             onClick={() => onNavigateSection('tours-section')}
-            className="text-xs uppercase font-semibold tracking-wider text-white/80 hover:text-white transition-colors"
+            className="text-sm font-medium text-white/75 hover:text-[#c4a57b] transition-colors"
           >
             {t.navTours}
           </button>
           <button 
             id="nav-link-big-five"
             onClick={() => onNavigateSection('big-five-section')}
-            className="text-xs uppercase font-semibold tracking-wider text-white/80 hover:text-white transition-colors"
+            className="text-sm font-medium text-white/75 hover:text-[#c4a57b] transition-colors"
           >
             {t.navBigFive}
           </button>
           <button 
             id="nav-link-stories"
             onClick={() => onNavigateSection('stories-section')}
-            className="text-xs uppercase font-semibold tracking-wider text-white/80 hover:text-white transition-colors"
+            className="text-sm font-medium text-white/75 hover:text-[#c4a57b] transition-colors"
           >
             {t.navStories}
           </button>
@@ -277,7 +275,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          {/* Figma Star Hover Animated Book Button */}
+          {/* Primary booking CTA */}
           <SparkleButton
             id="navbar-book-expedition-cta"
             onClick={onOpenBooking}
@@ -315,7 +313,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onNavigateSection('destinations-section');
                 setIsMobileMenuOpen(false);
               }}
-              className="text-left text-xs uppercase tracking-wider font-semibold text-white/80 hover:text-white py-1"
+              className="text-left text-sm font-medium text-white/80 hover:text-[#c4a57b] py-1 transition-colors"
             >
               {t.navDestinations}
             </button>
@@ -325,7 +323,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onNavigateSection('tours-section');
                 setIsMobileMenuOpen(false);
               }}
-              className="text-left text-xs uppercase tracking-wider font-semibold text-white/80 hover:text-white py-1"
+              className="text-left text-sm font-medium text-white/80 hover:text-[#c4a57b] py-1 transition-colors"
             >
               {t.navTours}
             </button>
@@ -335,7 +333,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onNavigateSection('big-five-section');
                 setIsMobileMenuOpen(false);
               }}
-              className="text-left text-xs uppercase tracking-wider font-semibold text-white/80 hover:text-white py-1"
+              className="text-left text-sm font-medium text-white/80 hover:text-[#c4a57b] py-1 transition-colors"
             >
               {t.navBigFive}
             </button>
@@ -345,7 +343,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onNavigateSection('stories-section');
                 setIsMobileMenuOpen(false);
               }}
-              className="text-left text-xs uppercase tracking-wider font-semibold text-white/80 hover:text-white py-1"
+              className="text-left text-sm font-medium text-white/80 hover:text-[#c4a57b] py-1 transition-colors"
             >
               {t.navStories}
             </button>
@@ -359,7 +357,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 id="mobile-lang-select"
                 value={currentLanguage}
                 onChange={(e) => onLanguageChange(e.target.value as SupportedLanguage)}
-                className="w-full bg-[#181920] border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-white"
+                className="w-full bg-[#181920] border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-[#c4a57b]"
               >
                 {LANGUAGES.map((l) => (
                   <option key={l.code} value={l.code}>{l.flag} {l.label}</option>
@@ -373,7 +371,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 id="mobile-curr-select"
                 value={currentCurrency}
                 onChange={(e) => onCurrencyChange(e.target.value as SupportedCurrency)}
-                className="w-full bg-[#181920] border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-white"
+                className="w-full bg-[#181920] border border-white/15 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-[#c4a57b]"
               >
                 {CURRENCIES.map((c) => (
                   <option key={c.code} value={c.code}>{c.label}</option>

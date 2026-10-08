@@ -40,31 +40,22 @@ export const GuidedToursSection: React.FC<GuidedToursSectionProps> = ({
   return (
     <section id="tours-section" className="space-y-8 pt-8">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs font-mono font-bold text-white">02</span>
-            <div className="w-6 h-[1px] bg-white/40" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
-              EXPEDITIONS & SAFARI PACKAGES
-            </span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white uppercase">
-            {t.curatedToursTitle}
-          </h2>
-        </div>
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+          {t.curatedToursTitle}
+        </h2>
 
         {/* Region Filter Tabs */}
-        <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#14151a] border border-white/15">
+        <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#14151a] border border-white/15 self-start md:self-auto">
           {REGION_TABS.map((reg) => (
             <button
               key={reg}
               id={`tour-region-tab-${reg.toLowerCase().replace(/\s+/g, '-')}`}
               onClick={() => setActiveRegionTab(reg)}
-              className={`px-3.5 py-1.5 rounded-full text-xs uppercase font-semibold tracking-wider transition-all ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
                 activeRegionTab === reg
-                  ? 'bg-white text-black font-bold shadow-md'
-                  : 'text-white/80 hover:text-white'
+                  ? 'bg-white text-black shadow-md'
+                  : 'text-white/70 hover:text-white'
               }`}
             >
               {reg}
@@ -136,29 +127,29 @@ export const GuidedToursSection: React.FC<GuidedToursSectionProps> = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold tracking-tight mb-1.5 text-white uppercase">
+                <h3 className="text-lg font-semibold tracking-tight mb-1.5 text-white">
                   {tour.title}
                 </h3>
 
                 {/* Summary */}
-                <p className="text-xs text-white/85 line-clamp-2 leading-relaxed mb-3 font-normal">
+                <p className="text-xs text-white/75 line-clamp-2 leading-relaxed mb-3 font-normal">
                   {tour.shortSummary}
                 </p>
 
                 {/* Highlights / Included Perks */}
                 <div className="space-y-1 mb-3">
                   {tour.included.slice(0, 3).map((inc, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-white/85">
-                      <Check className="w-3.5 h-3.5 text-white shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-start gap-2 text-xs text-white/75">
+                      <Check className="w-3.5 h-3.5 text-[#c4a57b] shrink-0 mt-0.5" />
                       <span className="line-clamp-1">{inc}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Languages Available */}
-                <div className="flex items-center gap-1 text-[11px] text-white/70">
-                  <Languages className="w-3.5 h-3.5 text-white" />
-                  <span>Guides: {tour.guideLanguage.join(', ')}</span>
+                <div className="flex items-center gap-1 text-[11px] text-white/60">
+                  <Languages className="w-3.5 h-3.5" />
+                  <span>{tour.guideLanguage.join(', ')}</span>
                 </div>
               </div>
 
@@ -182,9 +173,9 @@ export const GuidedToursSection: React.FC<GuidedToursSectionProps> = ({
                   <button
                     id={`view-itinerary-btn-${tour.id}`}
                     onClick={() => onOpenTourDetails(tour)}
-                    className="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-white/15 bg-white/10 hover:bg-white/20 text-white transition-colors"
+                    className="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-colors"
                   >
-                    Itinerary
+                    {t.viewItinerary}
                   </button>
 
                   <SparkleButton
@@ -193,7 +184,7 @@ export const GuidedToursSection: React.FC<GuidedToursSectionProps> = ({
                     icon={<ArrowRight className="w-3 h-3 order-last" />}
                     className="px-4 py-2 text-xs"
                   >
-                    Book
+                    {t.bookDirectTour}
                   </SparkleButton>
                 </div>
               </div>

@@ -76,7 +76,7 @@ export const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
             value={filters.searchQuery}
             onChange={(e) => onFilterChange({ searchQuery: e.target.value })}
             placeholder={t.searchPlaceholder}
-            className="w-full pl-11 pr-4 py-3 rounded-full border border-white/15 bg-[#181920] text-white text-xs placeholder-white/50 focus:outline-none focus:border-white transition-colors"
+            className="w-full pl-11 pr-4 py-3 rounded-full border border-white/15 bg-[#181920] text-white text-xs placeholder-white/50 focus:outline-none focus:border-[#c4a57b] transition-colors"
           />
           {filters.searchQuery && (
             <button
@@ -96,7 +96,7 @@ export const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
               id="activity-filter-select"
               value={filters.selectedActivity}
               onChange={(e) => onFilterChange({ selectedActivity: e.target.value })}
-              className="w-full pl-10 pr-8 py-3 rounded-full border border-white/15 bg-[#181920] text-xs text-white appearance-none focus:outline-none focus:border-white"
+              className="w-full pl-10 pr-8 py-3 rounded-full border border-white/15 bg-[#181920] text-xs text-white appearance-none focus:outline-none focus:border-[#c4a57b]"
             >
               {ACTIVITIES.map((act) => (
                 <option key={act} value={act}>{act}</option>
@@ -109,7 +109,7 @@ export const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
         <button
           id="advanced-filters-toggle-button"
           onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
-          className={`flex items-center justify-center gap-2 px-5 py-3 rounded-full border text-xs font-semibold uppercase tracking-wider transition-all ${
+          className={`flex items-center justify-center gap-2 px-5 py-3 rounded-full border text-xs font-semibold transition-all ${
             isAdvancedOpen 
               ? 'bg-white text-black border-white font-bold shadow-md' 
               : 'bg-white/10 border-white/15 text-white/80 hover:text-white hover:bg-white/20'
@@ -141,7 +141,7 @@ export const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
               key={region}
               id={`region-pill-${region.toLowerCase().replace(/\s+/g, '-')}`}
               onClick={() => onFilterChange({ selectedRegion: region })}
-              className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-semibold whitespace-nowrap transition-all border ${
+              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${
                 isSelected
                   ? 'bg-white text-black border-white font-bold shadow-md'
                   : 'bg-white/10 hover:bg-white/20 border-white/15 text-white/80 hover:text-white'
@@ -187,7 +187,7 @@ export const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
                 {t.budgetLabel}
               </label>
               <span className="text-xs font-bold font-mono text-white">
-                Up to {formatPrice(filters.maxBudgetUSD, currentCurrency)}
+                {formatPrice(filters.maxBudgetUSD, currentCurrency)}
               </span>
             </div>
             <input
@@ -215,7 +215,7 @@ export const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
               id="difficulty-filter-select"
               value={filters.selectedDifficulty}
               onChange={(e) => onFilterChange({ selectedDifficulty: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-white"
+              className="w-full px-3.5 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-[#c4a57b]"
             >
               <option value="all">All Difficulties</option>
               <option value="Easy / Family">Easy / Family Friendly</option>
@@ -235,7 +235,7 @@ export const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
               id="sort-by-select"
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ sortBy: e.target.value as FilterState['sortBy'] })}
-              className="w-full px-3.5 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-white"
+              className="w-full px-3.5 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-[#c4a57b]"
             >
               <option value="popular">Most Popular & Recommended</option>
               <option value="price-asc">Price: Low to High</option>
@@ -249,9 +249,8 @@ export const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
       )}
 
       {/* Results Count & Active Search Feedback */}
-      <div className="flex items-center justify-between pt-3 mt-3 border-t text-xs text-white/80 border-white/10">
+      <div className="flex items-center justify-between pt-3 mt-3 border-t text-xs text-white/70 border-white/10">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-white" />
           <span className="font-semibold text-white">
             {totalResultsCount} {t.resultsFound}
           </span>
