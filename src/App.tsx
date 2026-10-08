@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Navbar } from './components/Navbar';
-import { HeroCarousel } from './components/HeroCarousel';
+import { HeroScroll } from './components/HeroScroll';
+import { StatsStrip } from './components/StatsStrip';
 import { SearchFilterBar } from './components/SearchFilterBar';
 import { FeaturedDestinations } from './components/FeaturedDestinations';
 import { GuidedToursSection } from './components/GuidedToursSection';
@@ -9,6 +10,7 @@ import { EditorialStorytelling } from './components/EditorialStorytelling';
 import { BookingModal } from './components/BookingModal';
 import { TourDetailsModal } from './components/TourDetailsModal';
 import { MyBookingsModal } from './components/MyBookingsModal';
+import { LegalModal } from './components/LegalModal';
 import { Footer } from './components/Footer';
 
 import { AFRICAN_DESTINATIONS, AFRICAN_TOURS } from './data/africanData';
@@ -69,8 +71,10 @@ function MainApp() {
 
   const [isMyBookingsOpen, setIsMyBookingsOpen] = useState(false);
 
+  const [legalSection, setLegalSection] = useState<'privacy' | 'terms' | null>(null);
+
   /**
-   * Destinations don't carry duration/difficulty themselves — they inherit
+   * Destinations don't carry duration/difficulty themselves, they inherit
    * them from their tour packages. A destination matches when at least one
    * of its tours satisfies the selected duration/difficulty.
    */
@@ -186,6 +190,11 @@ function MainApp() {
 
   return (
     <div className="min-h-screen bg-[#0d0e11] text-[#f3f4f6] transition-colors duration-300">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
+      <div className="grain-overlay" aria-hidden="true" />
+
       {/* Top fixed navbar */}
       <Navbar
         currentLanguage={currentLanguage}
@@ -198,18 +207,23 @@ function MainApp() {
         onNavigateSection={handleNavigateSection}
       />
 
-      {/* Hero carousel */}
-      <HeroCarousel
+      {/* Scroll-scrubbed hero */}
+      <HeroScroll
         destinations={AFRICAN_DESTINATIONS}
         currentLanguage={currentLanguage}
         currentCurrency={currentCurrency}
         onSelectDestination={(dest) => handleOpenDetails(null, dest)}
         onBookTourForDestination={(dest) => handleOpenBooking(null, dest)}
-        onExploreClick={() => handleNavigateSection('search-filter-anchor')}
       />
 
+      {/* Field numbers, lifted out of the old hero footer */}
+      <StatsStrip />
+
       {/* Main content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-24">
+      <main
+        id="main-content"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-24 scroll-mt-24"
+      >
         {/* Anchor for the search filter bar */}
         <div id="search-filter-anchor" className="scroll-mt-24">
           <SearchFilterBar
@@ -250,7 +264,11 @@ function MainApp() {
       </main>
 
       {/* Footer */}
-      <Footer currentLanguage={currentLanguage} onNavigateSection={handleNavigateSection} />
+      <Footer
+        currentLanguage={currentLanguage}
+        onNavigateSection={handleNavigateSection}
+        onOpenLegal={(section) => setLegalSection(section)}
+      />
 
       {/* Direct booking modal */}
       <BookingModal
@@ -277,6 +295,13 @@ function MainApp() {
         isOpen={isMyBookingsOpen}
         onClose={() => setIsMyBookingsOpen(false)}
         onOpenNewBooking={() => handleOpenBooking(AFRICAN_TOURS[0], null)}
+      />
+
+      {/* Privacy & terms */}
+      <LegalModal
+        isOpen={legalSection !== null}
+        section={legalSection ?? 'privacy'}
+        onClose={() => setLegalSection(null)}
       />
     </div>
   );
