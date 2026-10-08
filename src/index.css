@@ -3,18 +3,51 @@
 @theme {
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
+
+  /* One radius scale: containers 16px, controls/pills fully round */
+  --radius-card: 1rem;
+  --radius-card-lg: 1.25rem;
+
+  /* One accent, one surface family */
+  --color-accent: #c4a57b;
+  --color-ink: #0d0e11;
+  --color-surface: #14151a;
+  --color-surface-2: #191b21;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: var(--font-sans);
-    background-color: #0d0e11;
-    color: #f0f1f3;
+    background-color: var(--color-ink);
+    color: #eef0f3;
+    text-wrap: pretty;
   }
 
   h1, h2, h3 {
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #0d0e11;
+  }
+
+  /* Visible keyboard focus, gold to match the accent */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Body copy stays readable: ~65 characters */
+  p {
+    max-width: 65ch;
   }
 }
 
@@ -34,10 +67,50 @@
   background: #c4a57b;
 }
 
+/* Fixed grain overlay: breaks digital flatness without touching scroll containers */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
 /* Architectural grid line guide */
 .architectural-grid {
   background-size: 80px 80px;
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Screen-reader only skip link */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 70;
+  padding: 0.6rem 1rem;
+  background: var(--color-accent);
+  color: #0d0e11;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
+/* Reduced motion: collapse everything decorative to static */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
