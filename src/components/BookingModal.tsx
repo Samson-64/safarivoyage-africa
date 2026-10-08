@@ -230,10 +230,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <Calendar className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-white/70 block">
-                DIRECT EXPEDITION BOOKING
+              <span className="text-[10px] font-semibold tracking-[0.18em] text-[#c4a57b] block">
+                SafariVoyage Africa
               </span>
-              <h3 className="text-base sm:text-lg font-bold uppercase leading-tight line-clamp-1 text-white">
+              <h3 className="text-base sm:text-lg font-semibold leading-tight line-clamp-1 text-white">
                 {tourTitle}
               </h3>
             </div>
@@ -291,7 +291,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     value={startDate}
                     min={new Date().toISOString().split('T')[0]}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-white"
+                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-[#c4a57b]"
                   />
                 </div>
 
@@ -417,7 +417,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {step === 2 && (
             <div className="space-y-4">
               <div>
-                <h4 className="text-base font-bold uppercase tracking-wider text-white">Enhance Your African Safari</h4>
+                <h4 className="text-base font-semibold text-white">Enhance your safari</h4>
                 <p className="text-xs text-white/80">Hand-curated bespoke experiences to add to your expedition.</p>
               </div>
 
@@ -463,7 +463,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {/* STEP 3: Lead Traveler Info & Preferences */}
           {step === 3 && (
             <div className="space-y-4">
-              <h4 className="text-base font-bold uppercase tracking-wider text-white">Lead Traveler & Expedition Brief</h4>
+              <h4 className="text-base font-semibold text-white">Lead traveler details</h4>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -475,7 +475,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     type="text"
                     value={leadTraveler.fullName}
                     onChange={(e) => setLeadTraveler({ ...leadTraveler, fullName: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-white"
+                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-[#c4a57b]"
                   />
                 </div>
 
@@ -488,7 +488,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     type="email"
                     value={leadTraveler.email}
                     onChange={(e) => setLeadTraveler({ ...leadTraveler, email: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-white"
+                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-[#c4a57b]"
                   />
                 </div>
 
@@ -501,7 +501,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     type="tel"
                     value={leadTraveler.phone}
                     onChange={(e) => setLeadTraveler({ ...leadTraveler, phone: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-white"
+                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-[#c4a57b]"
                   />
                 </div>
 
@@ -513,7 +513,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     id="traveler-language-pref-select"
                     value={leadTraveler.guideLanguagePreference}
                     onChange={(e) => setLeadTraveler({ ...leadTraveler, guideLanguagePreference: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-white"
+                    className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-[#c4a57b]"
                   >
                     <option value="English">English</option>
                     <option value="French">French (Français)</option>
@@ -535,7 +535,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   value={leadTraveler.dietaryNotes}
                   onChange={(e) => setLeadTraveler({ ...leadTraveler, dietaryNotes: e.target.value })}
                   placeholder="e.g. Vegetarian, Halal, Gluten-free, Nut allergy"
-                  className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-white"
+                  className="w-full px-4 py-2.5 rounded-full border border-white/15 bg-[#181920] text-xs text-white focus:outline-none focus:border-[#c4a57b]"
                 />
               </div>
 
@@ -548,7 +548,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <div className="p-4 rounded-xl bg-[#181920] border border-white/15 flex items-center gap-3">
                 <ShieldCheck className="w-5 h-5 text-white shrink-0" />
                 <div className="text-xs text-white/80">
-                  <span className="font-bold text-white block uppercase text-[10px] tracking-wider">Safari Concierge Guarantee</span>
+                  <span className="font-semibold text-white block text-xs">Safari concierge guarantee</span>
                   Zero deposit risk: 100% full refund up to 30 days before departure. Official national park conservation permits are secured directly.
                 </div>
               </div>
@@ -659,7 +659,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <button
                   id="print-ticket-btn"
                   onClick={() => window.print()}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-neutral-100 text-black text-xs font-bold transition-all uppercase tracking-wider shadow-md hover:scale-105 cursor-pointer"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-neutral-100 text-black text-xs font-bold transition-all shadow-md hover:scale-105 cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>{t.downloadTicket}</span>
@@ -677,7 +677,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             
             {/* Live Pricing Summary */}
             <div>
-              <span className="text-[10px] uppercase text-white/70 block">Estimated Total</span>
+              <span className="text-[10px] text-white/60 block">Estimated total</span>
               <span className="text-lg font-bold font-mono text-white">
                 {formatPrice(grandTotalUSD, currentCurrency)}
               </span>
@@ -700,7 +700,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <button
                   id="booking-step-next-btn"
                   onClick={() => setStep((step + 1) as 2 | 3)}
-                  className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white hover:bg-neutral-100 active:bg-neutral-200 text-black font-bold text-xs transition-all uppercase tracking-wider shadow-md hover:scale-105 cursor-pointer"
+                  className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white hover:bg-neutral-100 active:bg-neutral-200 text-black font-bold text-xs transition-all shadow-md hover:scale-105 cursor-pointer"
                 >
                   <span>{t.nextStep}</span>
                   <ArrowRight className="w-3 h-3" />
