@@ -1,115 +1,117 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { EDITORIAL_STORIES } from '../data/africanData';
-import { Quote, CheckCircle } from 'lucide-react';
 
 export const EditorialStorytelling: React.FC = () => {
+  const [lead, ...rest] = EDITORIAL_STORIES;
+
   return (
-    <section id="stories-section" className="space-y-16 py-12">
+    <section id="stories-section" className="space-y-10 py-12">
       {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-3">
-        <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">
-          Conservation, Community & Heritage
-        </h2>
-        <p className="text-xs sm:text-sm text-white/85 leading-relaxed font-normal">
-          Every journey booked through SafariVoyage directly sustains indigenous anti-poaching units, village educational foundations, and renewable clean water infrastructure.
-        </p>
-      </div>
+      <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+        Conservation, community &amp; heritage
+      </h2>
 
-      {/* Numbered Stories in Editorial Style */}
-      <div className="space-y-20">
-        {EDITORIAL_STORIES.map((story, index) => {
-          const isEven = index % 2 === 1;
+      {/* Lead story: full-bleed image band with the quote */}
+      <motion.article
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="relative rounded-2xl overflow-hidden border border-white/10 min-h-[480px] sm:min-h-[540px] flex items-end"
+      >
+        <img
+          src={lead.image}
+          alt={lead.title}
+          referrerPolicy="no-referrer"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0e11] via-[#0d0e11]/85 to-[#0d0e11]/25" />
 
-          return (
-            <div
-              key={story.number}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
-            >
-              {/* Text Editorial Column */}
-              <div className={`lg:col-span-6 space-y-5 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                
-                {/* Number & Category Header */}
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-3xl sm:text-4xl font-bold text-white tracking-tighter">
-                    {story.number}
-                  </span>
-                  <div className="w-8 h-[1px] bg-white/30" />
-                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80">
-                    {story.category}
-                  </span>
-                </div>
+        <div className="relative z-10 p-6 sm:p-10 max-w-2xl space-y-4">
+          <span className="text-xs font-semibold text-[#c4a57b]">{lead.category}</span>
 
-                {/* Title & Subtitle */}
-                <div className="space-y-1">
-                  <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white leading-tight">
-                    {story.title}
-                  </h3>
-                  <p className="text-xs text-white/70 uppercase tracking-wider">
-                    {story.subtitle}
-                  </p>
-                </div>
+          <h3 className="font-serif text-2xl sm:text-3xl font-semibold leading-tight text-white">
+            {lead.title}
+          </h3>
 
-                {/* Body Content */}
-                <p className="text-xs sm:text-sm text-white/85 leading-relaxed font-normal">
-                  {story.body}
-                </p>
+          <p className="text-sm text-white/80 leading-relaxed">{lead.body}</p>
 
-                {/* Quote Callout */}
-                <div className="p-4 rounded-xl bg-[#181920] border-l-2 border-white space-y-1.5 shadow-md">
-                  <div className="flex items-start gap-2">
-                    <Quote className="w-4 h-4 text-white shrink-0 mt-0.5" />
-                    <p className="text-xs text-white italic leading-relaxed">
-                      "{story.quote}"
-                    </p>
-                  </div>
-                  <span className="block text-[10px] font-bold text-white/80 pl-6 uppercase tracking-wider">
-                    — {story.author}
-                  </span>
-                </div>
+          <blockquote className="border-l-2 border-[#c4a57b] pl-4 space-y-1.5">
+            <p className="font-serif italic text-white leading-relaxed">
+              &ldquo;{lead.quote}&rdquo;
+            </p>
+            <footer className="text-xs text-white/60">{lead.author}</footer>
+          </blockquote>
 
-                {/* Micro Stats Grid */}
-                <div className="grid grid-cols-3 gap-3 pt-3 border-t border-white/10">
-                  {story.stats.map((st, i) => (
-                    <div key={i}>
-                      <span className="block font-mono text-base font-bold text-white">
-                        {st.value}
-                      </span>
-                      <span className="text-[10px] text-white/70 uppercase tracking-wider block">
-                        {st.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
+          <dl className="grid grid-cols-3 gap-3 pt-3 border-t border-white/10">
+            {lead.stats.map((st) => (
+              <div key={st.label}>
+                <dt className="sr-only">{st.label}</dt>
+                <dd className="font-serif text-base font-semibold text-white tabular-nums">
+                  {st.value}
+                </dd>
+                <span className="text-[10px] text-white/55 block leading-snug">
+                  {st.label}
+                </span>
               </div>
+            ))}
+          </dl>
+        </div>
+      </motion.article>
 
-              {/* Imagery Editorial Column */}
-              <div className={`lg:col-span-6 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-                <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-[#0d0e11] group shadow-xl">
-                  <img
-                    src={story.image}
-                    alt={story.title}
-                    referrerPolicy="no-referrer"
-                    className="w-full aspect-[4/3] object-cover transition-opacity duration-300"
-                  />
-                  <div className="absolute inset-0 bg-[#0d0e11]/40" />
-                  
-                  {/* Floating badge */}
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] text-white bg-[#14151a]/95 border border-white/15 p-3 rounded-full backdrop-blur-md shadow-lg">
-                    <div className="flex items-center gap-2 font-medium">
-                      <CheckCircle className="w-3.5 h-3.5 text-white" />
-                      <span className="text-[10px] uppercase tracking-wider text-white/80">Certified Community Partner</span>
-                    </div>
-                    <span className="text-white font-bold font-mono text-[10px]">#AFRICA2026</span>
-                  </div>
-                </div>
-              </div>
-
+      {/* Two compact editorial columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {rest.map((story, i) => (
+          <motion.article
+            key={story.number}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-4"
+          >
+            <div className="relative rounded-2xl overflow-hidden border border-white/10">
+              <img
+                src={story.image}
+                alt={story.title}
+                referrerPolicy="no-referrer"
+                className="w-full aspect-[16/10] object-cover"
+              />
+              <div className="absolute inset-0 bg-[#0d0e11]/25" />
             </div>
-          );
-        })}
+
+            <span className="block text-xs font-semibold text-[#c4a57b]">{story.category}</span>
+
+            <h3 className="font-serif text-xl sm:text-2xl font-semibold leading-snug text-white">
+              {story.title}
+            </h3>
+
+            <p className="text-sm text-white/75 leading-relaxed">{story.body}</p>
+
+            <blockquote className="border-l-2 border-[#c4a57b] pl-4 space-y-1.5">
+              <p className="font-serif italic text-sm text-white leading-relaxed">
+                &ldquo;{story.quote}&rdquo;
+              </p>
+              <footer className="text-xs text-white/60">{story.author}</footer>
+            </blockquote>
+
+            <dl className="grid grid-cols-3 gap-3 pt-3 border-t border-white/10">
+              {story.stats.map((st) => (
+                <div key={st.label}>
+                  <dt className="sr-only">{st.label}</dt>
+                  <dd className="font-serif text-sm font-semibold text-white tabular-nums">
+                    {st.value}
+                  </dd>
+                  <span className="text-[10px] text-white/55 block leading-snug">
+                    {st.label}
+                  </span>
+                </div>
+              ))}
+            </dl>
+          </motion.article>
+        ))}
       </div>
     </section>
   );
 };
-
